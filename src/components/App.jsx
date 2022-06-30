@@ -1,9 +1,12 @@
-import { FeedbackSection } from './FeedbackSection/FeedbackSection';
+import { FeedbackSection } from './Feedback/FeedbackSection/FeedbackSection';
 
 export const App = () => {
   return (
     <div>
-      <FeedbackSection />
+      <FeedbackSection
+        title={'Please leave feedback'}
+        titleStatistic={'Statistics'}
+      />
     </div>
   );
 };
