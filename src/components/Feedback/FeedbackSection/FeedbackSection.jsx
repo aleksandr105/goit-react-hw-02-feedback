@@ -17,27 +17,18 @@ export class FeedbackSection extends Component {
     bad: 0,
   };
 
-  IncrementGood = () => {
-    this.setState(prewState => {
-      return { good: prewState.good + 1 };
-    });
-  };
-
-  IncrementNeutral = () => {
-    this.setState(prewState => {
-      return { neutral: prewState.neutral + 1 };
-    });
-  };
-
-  IncrementBad = () => {
-    this.setState(prewState => {
-      return { bad: prewState.bad + 1 };
+  handleFeedback = e => {
+    const eventName = e.target.textContent.toLowerCase();
+    this.setState(prevState => {
+      return {
+        [eventName]: prevState[eventName] + 1,
+      };
     });
   };
 
   render() {
     const { good, neutral, bad } = this.state;
-    const { IncrementGood, IncrementNeutral, IncrementBad } = this;
+    const { handleFeedback } = this;
 
     const CountTotalFeedback = () => {
       return good + neutral + bad;
@@ -54,9 +45,8 @@ export class FeedbackSection extends Component {
         <Container>
           <Title>{this.props.title}</Title>
           <FeedbackOptions
-            goodIncrement={IncrementGood}
-            neutralIncrement={IncrementNeutral}
-            badIncrement={IncrementBad}
+            options={['Good', 'Neutral', 'Bad']}
+            onLeaveFeedback={handleFeedback}
           />
           <TitleStatistic>{this.props.titleStatistic}</TitleStatistic>
           {CountTotalFeedback() === 0 && (

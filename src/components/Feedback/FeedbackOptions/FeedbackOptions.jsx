@@ -5,34 +5,21 @@ import {
   OptionButton,
 } from './FeedbackOptions.styled';
 
-export const FeedbackOptions = ({
-  goodIncrement,
-  neutralIncrement,
-  badIncrement,
-}) => {
+export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
   return (
     <OptionList>
-      <OptionItems>
-        <OptionButton type="button" onClick={goodIncrement}>
-          Good
-        </OptionButton>
-      </OptionItems>
-      <OptionItems>
-        <OptionButton type="button" onClick={neutralIncrement}>
-          Neutral
-        </OptionButton>
-      </OptionItems>
-      <OptionItems>
-        <OptionButton type="button" onClick={badIncrement}>
-          Bad
-        </OptionButton>
-      </OptionItems>
+      {options.map(el => (
+        <OptionItems key={el}>
+          <OptionButton type="button" onClick={onLeaveFeedback}>
+            {el}
+          </OptionButton>
+        </OptionItems>
+      ))}
     </OptionList>
   );
 };
 
 FeedbackOptions.propTypes = {
-  goodIncrement: PropTypes.func.isRequired,
-  neutralIncrement: PropTypes.func.isRequired,
-  badIncrement: PropTypes.func.isRequired,
+  onLeaveFeedback: PropTypes.func.isRequired,
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
